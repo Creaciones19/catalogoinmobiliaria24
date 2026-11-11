@@ -1,4 +1,4 @@
-<!doctype html><html lang="es" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Catálogo INMOBILIARIA24 · Vista ligera</title><meta name="description" content="Catálogo inmobiliario de prueba con galerías de cinco fotografías, PDF y administración protegida."><style>
+<!doctype html><html lang="es" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Catálogo INMOBILIARIA24 · Vista ligera</title><meta name="description" content="Catálogo inmobiliario de prueba con galerías de cinco fotografías, PDF y administración protegida."><link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png"><meta name="theme-color" content="#071116"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="INMOBILIARIA24"><style>
 :root {
 
   --bg: #071116;
@@ -1101,7 +1101,7 @@ nav a:hover {
 
   display: block;
 
-  object-fit: contain;
+  object-fit: cover; transform: scale(1.10); transform-origin: center center;
 
   background: #000;
 
@@ -3179,6 +3179,96 @@ dialog{border:0;border-radius:10px;background:var(--bg);padding:38px;max-width:6
 #property-video-player{display:grid;place-items:center;background:#000;border-radius:8px;overflow:hidden}
 #property-video-player iframe{display:block;width:100%;height:min(56vw,58dvh,480px);border:0}
 #property-video-external{display:inline-block;margin-top:14px;color:var(--cyan)}
+/* Logotipo en el lugar del círculo anterior */
+.logo-hero{border:0;background:transparent;box-shadow:none;display:flex;align-items:center;justify-content:center;width:100%;max-width:360px;aspect-ratio:1360/1156;overflow:visible;padding:0}
+.logo-hero::before{display:none}
+.logo-hero img{display:block;width:100%;height:auto;object-fit:contain;border-radius:0;filter:drop-shadow(0 8px 24px rgba(20,120,220,.18))}
+@media(max-width:900px){.logo-hero{width:min(65vw,260px)}}
+
+/* Portada de video con reproducción al tocar, sin alterar otras secciones */
+.video-cover-card {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  isolation: isolate;
+}
+.video-cover-card video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: none;
+  background: #000;
+}
+.video-cover-play {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.video-cover-play span {
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  padding-left: 5px;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 50%;
+  background: rgba(20,36,49,.68);
+  color: #fff;
+  font-size: 31px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.3);
+}
+.video-cover-play:hover span { background: rgba(22,119,255,.82); }
+.video-cover-play:focus-visible { outline: 3px solid var(--cyan); outline-offset: -5px; }
+.video-cover-play[hidden] { display: none !important; }
+
+/* Tarjeta de video: marco de cristal, esquinas suaves y sombra,
+   siguiendo la presentación de Viajando en la Luz. */
+.video-presentation-card {
+  width: min(100%, 430px);
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.46);
+  border-radius: 36px;
+  background: linear-gradient(135deg,rgba(255,255,255,.13),rgba(54,142,190,.06));
+  box-shadow: 0 25px 70px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.22);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
+}
+.video-presentation-card .video-box {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 27px;
+  border: 1px solid rgba(255,255,255,.25);
+  box-shadow: none;
+}
+/* Ajuste de encuadre: la tarjeta sigue la imagen, sin franjas negras. */
+.video-presentation-card .video-box {
+  aspect-ratio: 10 / 16;
+  background: #101b23;
+}
+.video-presentation-card .video-box video {
+  border-radius: 26px;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.16);
+  transform-origin: center;
+}
+
+@media (max-width: 600px) {
+  .video-presentation-card { width: min(100%, 380px); padding: 8px; border-radius: 29px; }
+  .video-presentation-card .video-box { border-radius: 22px; }
+  .video-presentation-card .video-box video { border-radius: 21px; }
+}
 </style></head><body>
   <header class="site-header">
     <a class="brand" href="#inicio" aria-label="INMOBILIARIA24, inicio"><span><strong>INMOBILIARIA24</strong><small></small></span></a>
@@ -3191,7 +3281,7 @@ dialog{border:0;border-radius:10px;background:var(--bg);padding:38px;max-width:6
       <div class="hero-heading"><div class="hero-heading-copy">
       <span class="eyebrow">Catálogo de prueba · 30 propiedades de Puebla</span>
       <h1>Encuentra tu próxima<br>propiedad en<br>Puebla</h1>
-      </div><div class="guarantee-seal trial-seal"><strong>30</strong><span>PROPIEDADES DE PRUEBA</span><b>5, 10 y 15 fotos por inmueble</b></div></div>
+      </div><div class="guarantee-seal logo-hero" aria-label="Logotipo INMOBILIARIA24"><img src="logoinmsinfondo.png" alt="INMOBILIARIA24" loading="eager"></div></div>
       <p class="hero-copy">Propiedades en venta <b>·</b> Galería de fotografías <b>·</b> PDF descargable</p><p class="connection-state" id="mode-label">Archivo completo · vista sin conexión</p>
       <div class="search-box" role="search">
         <label><span>Ubicación</span><input id="location" placeholder="Estado, ciudad o zona"></label>
@@ -3241,10 +3331,17 @@ dialog{border:0;border-radius:10px;background:var(--bg);padding:38px;max-width:6
     <p>Conozca los detalles de la propiedad que le interesa. Consulte a su asesor para confirmar disponibilidad, conocer las condiciones de compra y agendar una visita.</p>
     <a href="https://wa.me/523343340062?text=Hola%2C%20deseo%20informaci%C3%B3n%20adicional%20sobre%20una%20propiedad%20del%20cat%C3%A1logo." target="_blank" rel="noopener noreferrer">Hablar con un asesor</a>
   </div>
-  <div class="video-box informative-video-placeholder" role="group" aria-label="Espacio para video informativo">
-    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="29" stroke="currentColor" stroke-width="2"/><path d="M26 20L45 32L26 44V20Z" fill="currentColor"/></svg>
-    <h3>Video informativo</h3>
-    <p>Aquí se podrá agregar un video informativo para enriquecer su página web.</p>
+  <!-- Tarjeta de presentación del video, inspirada en Viajando en la Luz -->
+  <div class="video-presentation-card">
+    <div class="video-box video-cover-card" aria-label="Video informativo">
+    <video id="video-informativo" preload="metadata" playsinline aria-label="Video informativo de INMOBILIARIA24">
+      <source src="videoinformativo.mp4" type="video/mp4">
+      Su navegador no permite reproducir este video.
+    </video>
+    <button type="button" class="video-cover-play" id="video-informativo-play" aria-label="Reproducir video informativo">
+      <span aria-hidden="true">▶</span>
+    </button>
+    </div>
   </div>
 </section>
 
@@ -3783,4 +3880,36 @@ addressInput.addEventListener('input',()=>{clearTimeout(addressTimer);if(address
 addressInput.addEventListener('keydown',e=>{if(suggestions.hidden)return;const options=[...suggestions.querySelectorAll('button')];if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();addressIndex=(addressIndex+(e.key==='ArrowDown'?1:-1)+options.length)%options.length;options.forEach((b,i)=>{b.classList.toggle('active',i===addressIndex);b.setAttribute('aria-selected',i===addressIndex?'true':'false')})}else if(e.key==='Enter'&&addressIndex>=0){e.preventDefault();chooseAddress(addressOptions[addressIndex])}else if(e.key==='Escape'){e.preventDefault();hideAddress()}});
 document.addEventListener('click',e=>{if(e.target!==addressInput&&!suggestions.contains(e.target))hideAddress()});
 
-</script></body></html>
+</script>
+<script>
+/* Fotograma inicial como portada, botón central y controles al reproducir. */
+(function () {
+  const video = document.getElementById('video-informativo');
+  const playButton = document.getElementById('video-informativo-play');
+  if (!video || !playButton) return;
+
+  video.addEventListener('loadedmetadata', function () {
+    if (!video.dataset.coverReady && video.duration > 0.5) {
+      video.dataset.coverReady = '1';
+      try { video.currentTime = 0.35; } catch (error) { /* usar primer fotograma */ }
+    }
+  }, { once: true });
+
+  playButton.addEventListener('click', async function () {
+    video.controls = true;
+    playButton.hidden = true;
+    try { await video.play(); }
+    catch (error) {
+      playButton.hidden = false;
+      video.controls = false;
+    }
+  });
+
+  video.addEventListener('ended', function () {
+    video.controls = false;
+    playButton.hidden = false;
+    try { video.currentTime = 0.35; } catch (error) { /* sin acción */ }
+  });
+})();
+</script>
+</body></html>
